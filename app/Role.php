@@ -17,4 +17,13 @@ class Role extends Model
      * @var boolean
      */
     public $timestamps = false;
+
+    /**
+     * Get users associated with the role
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users() {
+        return $this->belongsToMany('App\User');
+    }
 }
