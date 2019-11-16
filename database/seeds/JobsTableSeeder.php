@@ -17,6 +17,7 @@ class JobsTableSeeder extends Seeder
 
         $approvedUser = User::where('approved', true)->first();
         $notApprovedUser = User::where('approved', false)->first();
+        $trashedUser = User::onlyTrashed()->first();
 
         Job::create([
             'title' => 'Approved job 1',
@@ -50,8 +51,7 @@ class JobsTableSeeder extends Seeder
             'title' => 'Spam job',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             'email' => 'test@test.com',
-            'user_id' => $notApprovedUser->id,
-            'deleted_at' => date("Y-m-d H:i:s")
+            'user_id' => $trashedUser->id,
         ]);
     }
 }
