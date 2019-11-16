@@ -61,4 +61,13 @@ class User extends Authenticatable
 
         return false;
     }
+
+    /**
+     * Get jobs associated with the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function jobs() {
+        return $this->hasMany('App\Job');
+    }
 }
