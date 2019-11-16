@@ -5,8 +5,8 @@
 @foreach ($jobs as $job)
 <a href="{{ route('jobs.show', ['job' => $job->id]) }}">
     <li class="list-group-item clearfix">
-        <p class="float-left">{{ $job->title }}<p>
-        <span class="float-right">{{ explode(' ', $job->created_at)[0] }}</span>
+        <h4>{{ $job->title }}</h4>
+        <small><b>Posted at: </b><i>{{ explode(' ', $job->created_at)[0] }}</i></small>
     </li>
     </a>
 @endforeach
