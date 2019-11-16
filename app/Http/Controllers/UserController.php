@@ -34,14 +34,20 @@ class UserController extends Controller
     /**
      * Approve user.
      *
-     * @param  \App\User $user
+     * @param  int $user
      * @return \Illuminate\Http\Response
      */
-    public function approve(User $user) {
+    public function approve(int $id) {
+        $user = User::withTrashed()->find($id);
         $user->approved = true;
+
+        if($user->trashed()) {
+            $user->restore();
+        }
+
         $user->save();
 
-        return redirect()->route('users.notApproved');
+        return back();
     }
 
     /**
