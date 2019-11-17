@@ -33,12 +33,5 @@ class UsersTableSeeder extends Seeder
             'email' => 'user@user.com',
             'password' => Hash::make('password')
         ]);
-
-        $trashedUser = User::create([
-            'name' => 'trash',
-            'email' => 'trash@user.com',
-            'password' => Hash::make('password'),
-            'deleted_at' => date("Y-m-d H:i:s")
-        ]);
     }
 }
