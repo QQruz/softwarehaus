@@ -60,7 +60,7 @@ class UserController extends Controller
     {
         $user->delete();
 
-        return redirect()->route('users.notApproved');
+        return back();
     }
 
     /**
