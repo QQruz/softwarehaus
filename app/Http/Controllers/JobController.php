@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Job;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class JobController extends Controller
 {
@@ -62,6 +63,11 @@ class JobController extends Controller
      */
     public function show(Job $job)
     {
+        // allow admins only to review posts made by trashed users
+        if ($job->user->trashed() && Gate::denies('edit-users')) {
+            return abort(404);
+        }
+
         return view('jobs.view')->with(compact('job'));
     }
 }
