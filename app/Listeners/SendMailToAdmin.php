@@ -24,11 +24,11 @@ class SendMailToAdmin implements ShouldQueue
         $body .= "\r\n\r\n";
         $body .= "To approve this post please follow:";
         $body .= "\r\n";
-        $body .= URL::signedRoute('mailLinks.approve', ['user' => $event->job->user->id]);
+        $body .= URL::signedRoute('users.mail.approve', ['user' => $event->job->user->id]);
         $body .= "\r\n\r\n";
         $body .= "If you think that this is spam please follow:";
         $body .= "\r\n";
-        $body .= URL::signedRoute('mailLinks.trash', ['user' => $event->job->user->id]);
+        $body .= URL::signedRoute('users.mail.delete', ['user' => $event->job->user->id]);
 
         // get emails of all admins
         $ccs = Role::where('name', 'admin')->first()
