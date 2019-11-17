@@ -17,41 +17,33 @@ class JobsTableSeeder extends Seeder
 
         $approvedUser = User::where('approved', true)->first();
         $notApprovedUser = User::where('approved', false)->first();
-        $trashedUser = User::onlyTrashed()->first();
 
         Job::create([
-            'title' => 'Approved job 1',
+            'title' => 'Job by approved user 1',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             'email' => 'test@test.com',
             'user_id' => $approvedUser->id
         ]);
 
         Job::create([
-            'title' => 'Approved job 2',
+            'title' => 'Job by approved user 2',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             'email' => 'test@test.com',
             'user_id' => $approvedUser->id
         ]);
 
         Job::create([
-            'title' => 'Approved job 3',
+            'title' => 'Job by approved user 3',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             'email' => 'test@test.com',
             'user_id' => $approvedUser->id
         ]);
 
         Job::create([
-            'title' => 'Not approved job',
+            'title' => 'Waiting for moderation',
             'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
             'email' => 'test@test.com',
             'user_id' => $notApprovedUser->id
-        ]);
-
-        Job::create([
-            'title' => 'Spam job',
-            'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua',
-            'email' => 'test@test.com',
-            'user_id' => $trashedUser->id,
         ]);
     }
 }
