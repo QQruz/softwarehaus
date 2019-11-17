@@ -25,6 +25,14 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        // users that are waiting for moderation (approved === 0 (false))
+        // cant post new jobs
+        Gate::define('post-jobs', function($user) {
+            return $user->approved !== 0;
+        });
+
+        Gate::define('edit-users', function($user) {
+            return $user->hasRole('admin');
+        });
     }
 }
