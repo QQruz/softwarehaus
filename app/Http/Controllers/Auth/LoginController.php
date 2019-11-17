@@ -34,8 +34,7 @@ class LoginController extends Controller
     protected function authenticated(Request $request, $user)
     {
         if ($user->hasRole('admin')) {
-            // TODO: change to admin panel
-            return redirect()->route('jobs.index');
+            return redirect()->route('users.notApproved');
         }
 
         return redirect()->route('jobs.index');
