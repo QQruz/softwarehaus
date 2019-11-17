@@ -51,15 +51,6 @@ class JobController extends Controller
 
         $job->save();
 
-        // check if user is posting for the first time
-        if ($user->approved === NULL) {
-            // forbid user to post more jobs until approved
-            $user->approved = false;
-            $user->save();
-
-            // TODO: fire event
-        }
-
         return redirect()->route('jobs.index');
     }
 
