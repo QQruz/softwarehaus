@@ -24,13 +24,18 @@
                 <form action="{{ route('users.delete', ['user' => $user->id]) }}" method="POST" class="float-left">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="btn btn-danger">Delete</button>
+                    <button type="submit" class="btn
+                    {{ Route::currentRouteName() === 'users.listTrashed' ? 'btn-danger' : 'btn-warning' }}">
+                    {{ Route::currentRouteName() === 'users.listTrashed' ? 'Delete' : 'Spam'}}</button>
                 </form>
             </div>
         </div>
     </li>
+
 @empty
-    <h3 class="text-center"><i>Spam is empty</i></h3>
+    <h3 class="text-center"><i>
+    {{ Route::currentRouteName() === 'users.listTrashed' ? 'Spam is empty': 'No new users to approve' }}
+    </i></h3>
 @endforelse
 </ul>
 @endsection

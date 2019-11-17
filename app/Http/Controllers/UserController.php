@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $users = User::where('approved', false)->with('jobs')->get();
 
-        return view('admin.users-approve')->with(compact('users'));
+        return view('admin.users')->with(compact('users'));
     }
 
     /**
@@ -28,7 +28,7 @@ class UserController extends Controller
     {
         $users = User::onlyTrashed()->with('jobs')->get();
 
-        return view('admin.users-trash')->with(compact('users'));
+        return view('admin.users')->with(compact('users'));
     }
 
     /**
@@ -38,7 +38,7 @@ class UserController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function approve(int $id) {
-        $user = User::withTrashed()->find($id);
+        $user = User::withTrashed()->findOrFail($id);
         $user->approved = true;
 
         if($user->trashed()) {
@@ -51,19 +51,6 @@ class UserController extends Controller
     }
 
     /**
-     * Soft delete user.
-     *
-     * @param  \App\User $user
-     * @return \Illuminate\Http\Response
-     */
-    public function trash(User $user)
-    {
-        $user->delete();
-
-        return back();
-    }
-
-    /**
      * Delete user
      *
      * @param  int $id
@@ -71,10 +58,15 @@ class UserController extends Controller
      */
     public function destroy(int $id)
     {
-        $user = User::onlyTrashed()->find($id);
-        $user->forceDelete();
+        $user = User::withTrashed()->findOrFail($id);
 
-        return redirect()->route('users.listTrashed');
+        if ($user->trashed()) {
+            $user->forceDelete();
+        } else {
+            $user->delete();
+        }
+
+        return back();
     }
 
 
