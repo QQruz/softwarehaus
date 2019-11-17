@@ -11,3 +11,6 @@
 4) ```artisan migrate:fresh --seed```
 
     *Note: seeding is required for roles and admin, you can comment out additional seeders
+    
+Default admin password is password.
+You can change it in AdminSeeder.
