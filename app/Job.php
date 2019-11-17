@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Events\JobCreated;
 
 class Job extends Model
 {
@@ -14,6 +15,15 @@ class Job extends Model
      */
     protected $fillable = [
         'title', 'description', 'email'
+    ];
+
+    /**
+     * Model events
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => JobCreated::class
     ];
 
     /**

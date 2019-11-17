@@ -20,6 +20,13 @@ class EventServiceProvider extends ServiceProvider
         ],
         'App\Events\UserCreated' => [
             'App\Listeners\AttachRoleToNewUser',
+        ],
+        'App\Events\JobCreated' => [
+            'App\Listeners\CheckIfNewUser'
+        ],
+        'App\Events\NewUserPosted' => [
+            'App\Listeners\SendMailToUser',
+            'App\Listeners\SendMailToAdmin'
         ]
     ];
 
